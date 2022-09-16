@@ -24,6 +24,30 @@ public class Telefone {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@ForeignKey(name = "user_id")
 	private Usuario user;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public Usuario getUser() {
+		return user;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
 	
 	
 }
