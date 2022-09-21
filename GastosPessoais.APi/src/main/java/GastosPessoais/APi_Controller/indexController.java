@@ -1,5 +1,9 @@
 package GastosPessoais.APi_Controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -18,9 +22,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 import GastosPessoais.APi_Model.Usuario;
 import GastosPessoais.APi_Repository.UsuarioRepository;
-import GastosPessoais.APi_Service.EnvioEmail;
 
 @RequestMapping("/usuario")
 @RestController
@@ -29,8 +34,6 @@ public class indexController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	private EnvioEmail envioEmail;
 	
 	@PostMapping(value = "/cadastrar", produces = "application/json")
 	public ResponseEntity<Usuario> CadastrarUser(@RequestBody Usuario user){
@@ -42,10 +45,8 @@ public class indexController {
 		for (int i = 0; i < user.getListTell().size(); i++) {
 			user.getListTell().get(i).setUser(user);
 		}
-		if (user.getEmail() != null) {
-			envioEmail.sendMail("Boas Vindas "+user.getNomecompleto(),
-			"Obrigado(a) por confiar no nosso trabalho", user.getEmail());
-		}
+		
+		
 		
 		Usuario userSalvo = usuarioRepository.save(user);
 		
